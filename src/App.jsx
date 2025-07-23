@@ -1,10 +1,11 @@
 
 import './App.css'
+import Root from './components/Root'
 function App() {
   
   return (
     <div>
-      <h1 className='bg-red-600'>react-routing</h1>
+      <Root/>
     </div>
   )
 }
