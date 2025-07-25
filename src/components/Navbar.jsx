@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { FaBars } from 'react-icons/fa'
 import { IoMdClose } from 'react-icons/io'
+import { Link } from 'react-router';
+
 
 
 
@@ -12,15 +14,12 @@ export const Navbar = () => {
         setIsOpen(!isOpen);
     }
 
-
-
-
     return (
-        <nav className='bg-green-800 text-white py-4 md:py-6 '>
+        <nav className='bg-green-800 text-white py-4 md:py-8 sticky top-0 z-10 relative border-b-2 border-green-500'>
             <div className=' container mx-auto flex justify-between items-center'>
-                <h3> React Practice </h3>
+                <h3 className='text-3xl font-bold'> React Practice </h3>
                 {/* mobile menu button */}
-                <div>
+                <div className='md:hidden'>
                     <button onClick={toggleMenu}>
                         {
                             isOpen ? <IoMdClose /> : <FaBars/>
@@ -29,14 +28,31 @@ export const Navbar = () => {
                         
                     </button>
                 </div>
-                <ul className='flex space-x-4 md:space-x-6'>
-                    <li>Home</li>
-                    <li>Products</li>
-                    <li>Blogs</li>
-                    <li>Contact</li>
-                    <li>About</li>
+                <ul className='hidden md:flex space-x-4 md:space-x-6 '>
+                    <li> <Link to={'/'} className='hover:text-green-500' > Home </Link> </li>
+                    <li><Link to={'products'} className='hover:text-green-500'>Products</Link> </li>
+                    <li> <Link to={'blogs'} className='hover:text-green-500'>Blogs</Link> </li>
+                    <li> <Link to={'contact'} className='hover:text-green-500'>Contact</Link></li>
+                    <li> <Link to={'about'} className='hover:text-green-500'>About</Link></li>
+                    
                 </ul>
-                <button> Login </button>
+
+                <button className='hidden md:block bg-white text-black px-4 py-1 rounded cursor-pointer hover:bg-slate-400'> Login </button>
+
+                {/* Mobile menu collaapsed */}
+                <div className={`md:hidden w-full absolute bg-green-600 top-full left-0 ${isOpen ? 'block' : 'hidden'}`}>
+                     <ul className='flex flex-col  items-center py-6 space-y-2'>
+                        <li className='hover:text-green-500'>Home</li>
+                        <li className='hover:text-green-500'>Products</li>
+                        <li className='hover:text-green-500'>Blogs</li>
+                        <li className='hover:text-green-500'>Contact</li>
+                        <li className='hover:text-green-500'>About</li>
+                        <li>
+                        <button className='bg-white text-black px-4 py-1 rounded cursor-pointer hover:bg-slate-400'> Login </button>
+                     </li>
+                     
+                   </ul>
+                </div>
             </div>
         </nav>
     )
