@@ -65,7 +65,11 @@ export const Navbar = () => {
 
                 </ul>
 
-                <button className='hidden md:block bg-white text-black px-4 py-1 rounded cursor-pointer hover:bg-slate-400'> Login </button>
+                <Link to={'/login'}>
+                    <button className='hidden md:block bg-white text-black px-4 py-1 rounded cursor-pointer hover:bg-slate-400'> Login </button>
+                </Link>
+
+                
 
                 {/* Mobile menu collaapsed */}
                 <div className={`md:hidden w-full absolute bg-green-600 top-full left-0 ${isOpen ? 'block' : 'hidden'}`}>
