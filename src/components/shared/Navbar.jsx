@@ -27,11 +27,12 @@ export const Navbar = () => {
     }
 
     return (
-        <nav className='bg-green-800 text-white py-4 md:py-8 sticky top-0 z-10 relative border-b-2 border-green-500'>
+        <nav className='bg-black/60 text-white py-4 md:py-8 fixed w-full '>
             <div className=' container mx-auto flex justify-between items-center'>
                 <h3 className='text-3xl font-bold'> Simle React </h3>
+
                 {/* mobile menu button */}
-                <div className='md:hidden'>
+                <div className='md:hidden ml-auto'>
                     <button onClick={toggleMenu}>
                         {
                             isOpen ? <IoMdClose /> : <FaBars />
@@ -72,7 +73,7 @@ export const Navbar = () => {
                 
 
                 {/* Mobile menu collaapsed */}
-                <div className={`md:hidden w-full absolute bg-green-600 top-full left-0 ${isOpen ? 'block' : 'hidden'}`}>
+                <div className={`md:hidden w-full absolute bg-green-950 top-full left-0 ${isOpen ? 'block' : 'hidden'}`}>
                     <ul className='flex flex-col  items-center py-6 space-y-2'>
                         <li className='hover:text-green-500'>Home</li>
                         <li className='hover:text-green-500'>Products</li>
