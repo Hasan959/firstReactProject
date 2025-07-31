@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import  { useContext, useEffect, useState } from 'react'
 import { FaBars } from 'react-icons/fa'
 import { IoMdClose } from 'react-icons/io'
 import { Link, useLocation } from 'react-router';
+import { AuthContext } from '../../providers/AuthProvider';
+
 
 
 
@@ -11,6 +13,8 @@ export const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const[activeLink,setActiveLink] =useState('/');
     const location = useLocation();
+    const{user,handleSignout }= useContext(AuthContext);
+   
 
     useEffect(() => {
         setActiveLink(location.pathname || '/');
@@ -25,6 +29,10 @@ export const Navbar = () => {
         setActiveLink(path);
 
     }
+
+    const handleSignoutUser = () => {
+        handleSignout()
+    };
 
     return (
         <nav className='bg-black/60 text-white py-4 md:py-8 fixed w-full '>
@@ -62,13 +70,24 @@ export const Navbar = () => {
                     <li>
                         <Link to={'/about'} onClick={()=>handleLinkClick('/about')} className={`${activeLink === '/about' ? 'text-yellow-300' : 'hover:text-green-300'}`}>About</Link>
                     </li>
-
-
+                
                 </ul>
 
-                <Link to={'/login'}>
-                    <button className='hidden md:block bg-white text-black px-4 py-1 rounded cursor-pointer hover:bg-slate-400'> Login </button>
-                </Link>
+                <div >
+                {
+                    user ?  <div className='flex items-center'>
+                                <span>{user.email}</span> <button onClick={handleSignout} className='hidden md:block bg-white text-black px-4  py-1 rounded cursor-pointer hover:bg-slate-400'>Signout</button> 
+                            </div> 
+                            :
+                            <div>
+                               <span> {user?.email} </span>
+                               <Link to={'/login'}>
+                               <button className='hidden md:block bg-white text-black px-4 py-1 rounded cursor-pointer hover:bg-slate-400'> Login </button>
+                              </Link>
+                           </div>
+                
+                }
+                </div>
 
                 
 

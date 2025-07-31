@@ -1,8 +1,34 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router'
-import { FaGoogle ,FaGithub} from "react-icons/fa";
+import { FaGoogle ,FaGithub, FaEyeSlash, FaEye} from "react-icons/fa";
+import { AuthContext } from '../../providers/AuthProvider';
 
 const Login = () => {
+
+   const [showPass,setShowPass] = useState(false);
+
+const {signInWithEmailPass} = useContext(AuthContext);
+
+   const handleLoginForm = (e) => {
+      e.preventDefault();
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+
+      signInWithEmailPass(email,password)
+
+      .then(result => {
+         const user= result.user;
+         console.log(user);
+      })
+      .catch((err) =>{
+         console.error(err);
+      })
+
+     
+   }
+
+
+
   return (
     <div className=' flex justify-center items-center h-[100vh] px-4 bg-green-950 pt-5'>
        <div className='bg-white max-w-lg p-8'>
@@ -11,11 +37,24 @@ const Login = () => {
 
 
 
-        <form className='space-y-4 pb-2 '> 
+        <form onSubmit={handleLoginForm} className='space-y-4 pb-2 '> 
 
-            <input type="email" placeholder=' Email' className='w-full border px-4 py-2  rounded focus:outline-none focus:ring-2 focus: ring-green-500' name="" id="" />
+            
+               <input type='email' placeholder=' Email' className='w-full border px-4 py-2  rounded focus:outline-none focus:ring-2 focus: ring-green-500' name="email" id="email" />
+            
 
-            <input type="password" placeholder='Password' className='w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus: ring-green-500'  name="" id="" />
+            <div className=' relative flex items-center '>
+
+                <input type={showPass? 'text': 'password' } placeholder='Password' className='w-full border px-4 py-2 rounded focus:outline-none focus:ring-2 focus: ring-green-500'  name="password" id="password" />
+
+                {
+                showPass ? <FaEyeSlash onClick={() => setShowPass(!showPass)} className=' absolute  right-3 cursor-pointer' />
+                : <FaEye onClick={() => setShowPass(!showPass)} className=' absolute right-3 cursor-pointer hover:text-green-600' />
+              }
+              
+            </div>
+            
+            
 
             <div className='flex justify-between'>
                 <p>
